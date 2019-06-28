@@ -30,6 +30,16 @@
         <pageHelper.starter.version>1.2.3</pageHelper.starter.version>
         <leyou.latest.version>1.0.0-SNAPSHOT</leyou.latest.version>
         <fastDFS.client.version>1.26.1-RELEASE</fastDFS.client.version>
+        <kryo_version>4.0.2</kryo_version>
+        <lombok_version>1.16.22</lombok_version>
+        <spring_version>4.3.23.RELEASE</spring_version>
+        <spring-boot_version>1.5.20.RELEASE</spring-boot_version>
+        <javax-validation.version>2.0.1.Final</javax-validation.version>
+        <junit_version>4.12</junit_version>
+        <cglib_version>3.2.10</cglib_version>
+        <xxl-job_version>2.0.2</xxl-job_version>
+        <maven-compiler-plugin_version>3.8.0</maven-compiler-plugin_version>
+        <commons-lang3_version>3.4</commons-lang3_version>
     </properties>
 
 
@@ -57,6 +67,20 @@
                 <version>${mysql.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax-validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring_version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
 
 
         </dependencies>
@@ -65,15 +89,48 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>${commons-lang3_version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>${kryo_version}</version>
+        </dependency>
+        <!--lombok_version-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok_version}</version>
+        </dependency>
+
+
+
+
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit_version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
         <plugins>
+        <!--不使用SpringBoot自带的插件，因为这个打包会打包在Spring-Boot目录下导致别的项目引用时引用不到,而使用这个插件-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin_version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
             </plugin>
         </plugins>
     </build>
